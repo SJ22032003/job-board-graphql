@@ -78,28 +78,19 @@ export const GET_COMPANY_BY_ID = gql`
   }
 `;
 
-// async function getCompanyById(id) {
-//   const { data } = await apolloClient.query({ query, variables: { id } });
-//   return data.company;
-// }
-
-async function getJobById(id) {
-  const query = gql`
-    query Job($id: ID!) {
-      job(id: $id) {
+export const GET_JOB_BY_ID = gql`
+  query Job($id: ID!) {
+    job(id: $id) {
+      id
+      title
+      company {
         id
-        title
-        company {
-          id
-          name
-        }
-        date
-        description
+        name
       }
+      date
+      description
     }
-  `;
-  const { data } = await apolloClient.query({ query, variables: { id } });
-  return data.job;
-}
+  }
+`;
 
-export { getJobById, createJob };
+export { createJob };
