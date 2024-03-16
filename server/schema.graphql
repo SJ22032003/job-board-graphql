@@ -2,7 +2,7 @@ type Query {
   """
   jobs will get all the jobs we required in array
   """
-  jobs: [Job!]
+  jobs(input: GetJobsPaginationInput!): [Job!]
 
   """
   will fetch single job by id
@@ -33,7 +33,6 @@ type Job {
   company: Company!
 }
 
-
 type Mutation {
   createJob(input: CreateJobInput!): Job
   deleteJob(id: ID!): Job
@@ -48,4 +47,9 @@ input CreateJobInput {
 input UpdateJobInput {
   title: String
   description: String
+}
+
+input GetJobsPaginationInput {
+  page: Int!
+  limit: Int!
 }

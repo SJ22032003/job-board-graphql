@@ -10,8 +10,8 @@ import {
 
 export const resolvers = {
   Query: {
-    jobs: async (_, _inp, ctx) => {
-      return getJobs();
+    jobs: async (_, { input }, ctx) => {
+      return getJobs(input);
     },
     job: async (_, { id }) => getJob(id),
     company: async (_, { id }) => getCompany(id),
