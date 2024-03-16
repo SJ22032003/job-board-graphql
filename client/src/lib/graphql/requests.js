@@ -42,16 +42,20 @@ export const CREATE_NEW_JOB = gql`
 `;
 
 export const GET_JOBS = gql`
-  query {
-    jobs {
-      id
-      title
-      company {
+  query GetJobs($input: GetJobsPaginationInput!) {
+    jobs(input: $input) {
+      items {
         id
-        name
+        title
+        date
+        description
+        company {
+          id
+          name
+          description
+        }
       }
-      date
-      description
+      totalCount
     }
   }
 `;

@@ -2,7 +2,7 @@ type Query {
   """
   jobs will get all the jobs we required in array
   """
-  jobs(input: GetJobsPaginationInput!): [Job!]
+  jobs(input: GetJobsPaginationInput!): JobsPagination
 
   """
   will fetch single job by id
@@ -13,6 +13,11 @@ type Query {
   will fetch the company by id
   """
   company(id: ID!): Company
+}
+
+type JobsPagination {
+  items: [Job!]!
+  totalCount: Int!
 }
 
 type Company {

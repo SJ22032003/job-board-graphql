@@ -6,12 +6,15 @@ import {
   createJob,
   deleteJob,
   updateJob,
+  getJobsCount,
 } from "./db/jobs.js";
 
 export const resolvers = {
   Query: {
     jobs: async (_, { input }, ctx) => {
-      return getJobs(input);
+      const items = await getJobs(input);
+      const totalCount = await getJobsCount();
+      return { items, totalCount };
     },
     job: async (_, { id }) => getJob(id),
     company: async (_, { id }) => getCompany(id),

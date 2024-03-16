@@ -13,8 +13,9 @@ export function useGetCompanyByID(id) {
   return data;
 }
 
-export function useGetJobs() {
+export function useGetJobs({ limit = 5, page = 1 }) {
   const data = useQuery(GET_JOBS, {
+    variables: { input: { limit, page } },
     fetchPolicy: "network-only",
   });
   return data;
