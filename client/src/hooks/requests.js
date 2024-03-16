@@ -17,6 +17,7 @@ export function useGetJobs({ limit = 5, page = 1 }) {
   const data = useQuery(GET_JOBS, {
     variables: { input: { limit, page } },
     fetchPolicy: "network-only",
+    // pollInterval: 10000 
   });
   return data;
 }
