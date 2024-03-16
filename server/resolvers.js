@@ -1,4 +1,4 @@
-import { getCompany } from "./db/companies.js";
+import { getCompany, companyLoader } from "./db/companies.js";
 import {
   getJobs,
   getJob,
@@ -36,7 +36,7 @@ export const resolvers = {
 
   Job: {
     date: ({ createdAt }) => createdAt.slice(0, "yyyy-mm-dd".length),
-    company: async ({ companyId }) => getCompany(companyId),
+    company: async ({ companyId }, _args) => companyLoader.load(companyId),
   },
 
   Company: {
