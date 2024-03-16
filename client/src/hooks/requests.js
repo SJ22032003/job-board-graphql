@@ -1,5 +1,6 @@
-import { useQuery } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import {
+  CREATE_NEW_JOB,
   GET_COMPANY_BY_ID,
   GET_JOBS,
   GET_JOB_BY_ID,
@@ -24,4 +25,28 @@ export function useGetJobByID(id) {
     variables: { id },
   });
   return data;
+}
+
+export function useCreateJob() {
+  const [mutate, { loading, error }] = useMutation(CREATE_NEW_JOB);
+
+  const createJob = async (input) => {
+    const { data } = await mutate({
+      variables: { input },
+      update: (cache, { data }) => {
+        cache.writeQuery({
+          query: GET_JOB_BY_ID,
+          variables: { id: data.job.id },
+          data,
+        });
+      },
+    });
+    return data?.job;
+  };
+
+  return {
+    createJob,
+    loading,
+    error,
+  };
 }
